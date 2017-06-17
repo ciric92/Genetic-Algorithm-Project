@@ -32,5 +32,8 @@
     <ClCompile Include="RouletteSelectionTest.cpp">
       <Filter>Source Files\Selection</Filter>
     </ClCompile>
+    <ClCompile Include="TournamentSelectionTest.cpp">
+      <Filter>Source Files\Selection</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

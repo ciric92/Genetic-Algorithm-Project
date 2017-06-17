@@ -1,26 +1,21 @@
 #include "catch.hpp"
+#include "TournamentSelection.h"
+#include "RandomNumberSupplier.h"
 
-#include "RouletteSelection.h"
-#include <set>
-
-class RouletteTestRandomNumberSupplier : public RandomNumberSupplier {
-
+class TournamentTestRandomNumberSupplier : public RandomNumberSupplier {
+	bool flag;
 public:
 
-	RouletteTestRandomNumberSupplier() {}
-	~RouletteTestRandomNumberSupplier() {}
-
+	TournamentTestRandomNumberSupplier() { flag = false; }
 	int getRandomNumber() { return 0; }
-	int getRandomNumber(int limit) { return 0; }
-	double getRandomNumber0to1() {
-		return 0.018;
-	}
+	double getRandomNumber0to1() { return 0; }
+	int getRandomNumber(int limit) { flag = !flag;  return flag ? 1 : 0; }
 };
 
-TEST_CASE("Roulette selection basic functionality test") {
+TEST_CASE(" Tournament Selection basic functionality test ") {
 
-	RandomNumberSupplier* rnd = new RouletteTestRandomNumberSupplier();
-	Selection* selection = new RouletteSelection(5, rnd);
+	RandomNumberSupplier* rnd = new TournamentTestRandomNumberSupplier();
+	Selection* selection = new TournamentSelection(5, 2, rnd);
 
 	/* initialize test population */
 	std::vector<Individual*>* population = new std::vector<Individual*>();
@@ -46,11 +41,13 @@ TEST_CASE("Roulette selection basic functionality test") {
 			fitnessValues->insert(ind->getFitness());
 		});
 
-		for (int i = 1; i <= 5; i++) {
+		REQUIRE(fitnessValues->count(1) == 0);
+
+		for (int i = 2; i <= 6; i++) {
 			REQUIRE(fitnessValues->count(i) != 0);
 		}
 
-		for (int i = 6; i <= 10; i++) {
+		for (int i = 7; i <= 10; i++) {
 			REQUIRE(fitnessValues->count(i) == 0);
 		}
 	}
