@@ -19,6 +19,15 @@
     <Filter Include="Source Files\Selection">
       <UniqueIdentifier>{13969296-bca7-47e8-92d0-1d4bfe65d413}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Crossover">
+      <UniqueIdentifier>{a7a94117-804e-46be-8469-66daf99dc506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Crossover">
+      <UniqueIdentifier>{940e3def-e07b-4a22-8caf-1afbf6277721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{22ded43a-fc01-47e9-8e7f-7d31db329494}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneticAlgorithm.cpp">
@@ -35,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="RouletteSelection.cpp">
       <Filter>Source Files\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryCrossover.cpp">
+      <Filter>Source Files\Crossover</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,11 +68,17 @@
     <ClInclude Include="GeneticAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RandomNumberSupplier.h">
-      <Filter>Header Files\Selection</Filter>
+    <ClInclude Include="Crossover.h">
+      <Filter>Header Files\Crossover</Filter>
     </ClInclude>
     <ClInclude Include="DefaultRandomNumberSupplier.h">
-      <Filter>Header Files\Selection</Filter>
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomNumberSupplier.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryCrossover.h">
+      <Filter>Header Files\Crossover</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

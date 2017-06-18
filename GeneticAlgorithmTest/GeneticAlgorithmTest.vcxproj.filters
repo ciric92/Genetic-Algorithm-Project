@@ -35,5 +35,8 @@
     <ClCompile Include="TournamentSelectionTest.cpp">
       <Filter>Source Files\Selection</Filter>
     </ClCompile>
+    <ClCompile Include="BinaryCrossoverTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

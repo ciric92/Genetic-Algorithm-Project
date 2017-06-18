@@ -146,6 +146,7 @@
     <ClInclude Include="catch.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryCrossoverTest.cpp" />
     <ClCompile Include="DecimationSelectionTest.cpp" />
     <ClCompile Include="RouletteSelectionTest.cpp" />
     <ClCompile Include="TestRunner.cpp" />

@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryCrossover.cpp" />
     <ClCompile Include="DecimationSelection.cpp" />
     <ClCompile Include="GeneticAlgorithm.cpp" />
     <ClCompile Include="Individual.cpp" />
@@ -150,6 +151,8 @@
     <ClCompile Include="TournamentSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryCrossover.h" />
+    <ClInclude Include="Crossover.h" />
     <ClInclude Include="DecimationSelection.h" />
     <ClInclude Include="DefaultRandomNumberSupplier.h" />
     <ClInclude Include="GeneticAlgorithm.h" />

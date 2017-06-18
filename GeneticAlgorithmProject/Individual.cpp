@@ -7,4 +7,5 @@ Individual::Individual(double* values, int d) {
 	for (int i = 0; i < d; i++) {
 		this->values.at(i) = values[i];
 	}
+	this->setFitness(DBL_MIN);
 }

@@ -13,7 +13,7 @@ public:
 
 	Selection(int n) : n(n) {};
 
-	~Selection() {};
+	virtual ~Selection() {};
 
 	virtual std::vector<Individual*>* select(std::vector<Individual*>* population) = 0;
 };
