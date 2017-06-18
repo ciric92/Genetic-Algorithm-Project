@@ -10,7 +10,7 @@ class BinaryCrossover : public Crossover {
 
 public:
 
-	BinaryCrossover(int n, int m, RandomNumberSupplier* rnd, int eliteCount = 0) : Crossover(n, m, eliteCount), rnd(rnd) {}
+	BinaryCrossover(int n, int m, double crossProbability, RandomNumberSupplier* rnd, int eliteCount = 0) : Crossover(n, m, crossProbability, eliteCount), rnd(rnd) {}
 
 	~BinaryCrossover() {}
 

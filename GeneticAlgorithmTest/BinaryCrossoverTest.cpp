@@ -12,7 +12,7 @@ public:
 
 	int getRandomNumber() { return 0; }
 
-	double getRandomNumber0to1() { return 0; }
+	double getRandomNumber0to1() { return 0.5; }
 
 	int getRandomNumber(int limit) {
 		if (limit == 6) {
@@ -43,17 +43,17 @@ TEST_CASE(" Binary crossover basic functionaliy test ") {
 	newInd->setFitness(4);
 	population->push_back(newInd);
 
-	Crossover* cross = new BinaryCrossover(5, 2, new BinaryCrossoverTestRNS(), 4);
+	Crossover* cross = new BinaryCrossover(5, 2, 0.6, new BinaryCrossoverTestRNS(), 4);
 
 	std::vector<Individual*>* newGeneration = cross->performCrossover(population);
 
-	SECTION(" test elitsim ") {
+	SECTION(" test elitsim (save 4) ") {
 		for (int i = 0; i < 4; i++) {
 			REQUIRE(newGeneration->at(i) == population->at(i));
 		}
 	}
 
-	SECTION(" test crossover ") {
+	SECTION(" test crossover (produces only one because of the population size) ") {
 		Individual* offspring = newGeneration->at(4);
 		REQUIRE(offspring->getFitness() - DBL_MIN < DBL_EPSILON);
 

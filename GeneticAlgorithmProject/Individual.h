@@ -12,6 +12,8 @@ public:
 
 	Individual(double* values, int d);
 
+	Individual(Individual* other);
+
 	Individual() { };
 
 	Individual(const std::vector<double> values) : values(values) { };

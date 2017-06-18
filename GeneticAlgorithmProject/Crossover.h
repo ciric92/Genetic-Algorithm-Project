@@ -14,9 +14,12 @@ class Crossover {
 	/* number of elites */
 	int eliteCount;
 
+	/* probability of crossover */
+	double crossProb;
+
 public:
 
-	Crossover(int n, int m, int eliteCount = 0) : n(n), m(m), eliteCount(eliteCount) {}
+	Crossover(int n, int m, double crossoverProbability, int eliteCount = 0) : n(n), m(m), crossProb(crossoverProbability), eliteCount(eliteCount) {}
 
 	virtual ~Crossover() {}
 
@@ -27,6 +30,8 @@ public:
 	int getNumberOfIndividualsToCross() { return m; }
 
 	int getNumberOfEliteIndividuals() { return eliteCount; }
+
+	double getCrossoverProbability() { return crossProb; }
 };
 
 #endif // !__CROSSOVER_H__

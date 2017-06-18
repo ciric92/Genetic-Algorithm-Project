@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Selection">
       <UniqueIdentifier>{f9bac9ff-d05f-4bb3-8b63-98864286c919}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Crossover">
+      <UniqueIdentifier>{257c0f65-1e26-488f-9509-d2b2efeefb7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="catch.hpp">
@@ -36,7 +39,7 @@
       <Filter>Source Files\Selection</Filter>
     </ClCompile>
     <ClCompile Include="BinaryCrossoverTest.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Crossover</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

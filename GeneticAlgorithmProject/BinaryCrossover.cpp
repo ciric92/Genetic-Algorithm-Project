@@ -4,7 +4,7 @@
 
 /* function prototypes */
 std::vector<Individual*>* selectElites(std::vector<Individual*>* population, int numberOfElites);
-Individual* produceOffspring(std::vector<Individual*>* population, RandomNumberSupplier* rnd, int crossSize);
+std::vector<Individual*>* produceOffspring(std::vector<Individual*>* population, RandomNumberSupplier* rnd, int crossSize, double crossProb);
 
 std::vector<Individual*>* BinaryCrossover::performCrossover(std::vector<Individual*>* population) {
 	std::vector<Individual*>* crossoverPopulation = new std::vector<Individual*>();
@@ -14,7 +14,13 @@ std::vector<Individual*>* BinaryCrossover::performCrossover(std::vector<Individu
 	}
 
 	while (crossoverPopulation->size() < this->getNumberOfIndividualsToGenerate()) {
-		crossoverPopulation->push_back(produceOffspring(population, this->rnd, this->getNumberOfIndividualsToCross()));
+		std::vector<Individual*>* offsprings = produceOffspring(population, this->rnd, this->getNumberOfIndividualsToCross(), this->getCrossoverProbability());
+		for (int i = 0; i < offsprings->size(); i++) {
+			crossoverPopulation->push_back(offsprings->at(i));
+			if (crossoverPopulation->size() == this->getNumberOfIndividualsToGenerate()) {
+				break;
+			}
+		}
 	}
 
 	return crossoverPopulation;
@@ -34,37 +40,57 @@ std::vector<Individual*>* selectElites(std::vector<Individual*>* population, int
 	return elites;
 }
 
-Individual* produceOffspring(std::vector<Individual*>* population, RandomNumberSupplier* rnd, int crossSize) {
-	std::set<Individual*>* selected = new std::set<Individual*>();
-	std::set<int>* splitIndexes = new std::set<int>();
+std::vector<Individual*>* produceOffspring(std::vector<Individual*>* population, RandomNumberSupplier* rnd, int crossSize, double crossProb) {
+	std::vector<Individual*>* selectedForCrossover = new std::vector<Individual*>();
+	std::vector<Individual*>* offsprings = new std::vector<Individual*>();
 
-	int maxSplit = population->at(0)->getNumberOfDimensions();
-
-	while (selected->size() < crossSize) {
-		int num = rnd->getRandomNumber(population->size());
-		Individual* select = population->at(num);
-		if (selected->count(select) == 0) {
-			selected->insert(select);
+	while (selectedForCrossover->size() < crossSize) {
+		int index = rnd->getRandomNumber(population->size());
+		Individual* selected = population->at(index);
+		if (std::find(selectedForCrossover->begin(), selectedForCrossover->end(), selected) == selectedForCrossover->end()) {
+			selectedForCrossover->push_back(selected);
 		}
 	}
 
-	while (splitIndexes->size() < crossSize - 1) {
-		int num = rnd->getRandomNumber(maxSplit);
-		if (splitIndexes->count(num) == 0) {
-			splitIndexes->insert(num);
+	double cross = rnd->getRandomNumber0to1();
+	if (cross < crossProb) {
+		std::vector<int>* splitIndexes = new std::vector<int>();
+		int maxSplit = population->at(0)->getNumberOfDimensions();
+		while (splitIndexes->size() < crossSize - 1) {
+			int index = rnd->getRandomNumber(maxSplit);
+			if (std::find(splitIndexes->begin(), splitIndexes->end(), index) == splitIndexes->end()) {
+				splitIndexes->push_back(index);
+			}
+		}
+		std::sort(splitIndexes->begin(), splitIndexes->end());
+
+		double** values = new double*[crossSize];
+		for (int i = 0; i < crossSize; i++) {
+			values[i] = new double[maxSplit];
+		}
+
+		int offset = 0;
+		for (int i = 0; i < maxSplit; i++) {
+			if (splitIndexes->size() > offset && i == splitIndexes->at(offset)) {
+				offset++;
+			}
+
+			for (int j = 0; j < crossSize; j++) {
+				values[j][i] = selectedForCrossover->at((j + offset) % crossSize)->getValues()[i];
+			}
+		}
+
+		for (int i = 0; i < crossSize; i++) {
+			offsprings->push_back(new Individual(values[i], maxSplit));
+		}
+
+	} else {
+		for (int i = 0; i < selectedForCrossover->size(); i++) {
+			offsprings->push_back(new Individual(selectedForCrossover->at(i)));
 		}
 	}
 
-	double* values = new double[maxSplit];
-	std::set<int>::iterator sIt = splitIndexes->begin();
-	std::set<Individual*>::iterator iIt = selected->begin();
-	for (int i = 0; i < maxSplit; i++) {
-		if (sIt != splitIndexes->end() && i == *sIt) {
-			sIt++;
-			iIt++;
-		}
-		values[i] = (*iIt)->getValues()[i];
-	}
+	
 
-	return new Individual(values, maxSplit);
+	return offsprings;
 }
