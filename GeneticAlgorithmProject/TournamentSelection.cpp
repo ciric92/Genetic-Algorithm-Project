@@ -38,7 +38,7 @@ std::vector<Individual*>* selectParticipants(std::vector<Individual*>* populatio
 }
 
 Individual* selectWinner(std::vector<Individual*>* participants) {
-	double maxFitness = DBL_MIN;
+	double maxFitness = -DBL_MAX;
 	Individual* winner = nullptr;
 	for (int i = 0; i < participants->size(); i++) {
 		Individual* current = participants->at(i);

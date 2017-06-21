@@ -149,6 +149,8 @@
     <ClCompile Include="BinaryCrossoverTest.cpp" />
     <ClCompile Include="DecimationSelectionTest.cpp" />
     <ClCompile Include="RouletteSelectionTest.cpp" />
+    <ClCompile Include="MutationTest.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestRunner.cpp" />
     <ClCompile Include="TournamentSelectionTest.cpp" />
   </ItemGroup>

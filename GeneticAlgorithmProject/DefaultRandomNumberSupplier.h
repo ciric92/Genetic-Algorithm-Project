@@ -14,7 +14,7 @@ public:
 	
 	int getRandomNumber() { return rand(); }
 	
-	double getRandomNumber0to1() { return ((double)rand() / (RAND_MAX)) + 1; }
+	double getRandomNumber0to1() { return ((double)rand() / (RAND_MAX)); }
 
 	int getRandomNumber(int limit) { return rand() % limit; }
 };

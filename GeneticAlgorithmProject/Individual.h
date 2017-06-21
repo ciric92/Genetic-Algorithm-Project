@@ -26,6 +26,8 @@ public:
 
 	void setFitness(double fitness) { this->fitness = fitness; }
 
+	void setValues(std::vector<double> values) { this->values = values;  }
+
 	~Individual() { }
 };
 

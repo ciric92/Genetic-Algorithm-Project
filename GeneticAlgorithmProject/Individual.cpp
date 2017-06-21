@@ -11,8 +11,7 @@ Individual::Individual(double* values, int d) {
 }
 
 Individual::Individual(Individual * other) {
-	this->values.resize(other->getNumberOfDimensions());
-	for (int i = 0; i < this->getNumberOfDimensions(); i++) {
+	for (int i = 0; i < other->getNumberOfDimensions(); i++) {
 		this->values.push_back(other->values.at(i));
 	}
 	this->setFitness(DBL_MIN);
